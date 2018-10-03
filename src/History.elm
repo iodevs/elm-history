@@ -1,6 +1,7 @@
 module History exposing
     ( History
     , create, forward, rewind, current
+    , rewindAll
     )
 
 {-| This library helps with keeping history of states of your variables.
@@ -60,7 +61,7 @@ forward value (History old past) =
     History value (old :: past)
 
 
-{-| Puts first element of list to history.
+{-| Inserts last added element of list to history.
 
     rewind addNew
 
@@ -72,6 +73,23 @@ rewind ((History _ past) as history) =
     case past of
         old :: remains ->
             History old remains
+
+        [] ->
+            history
+
+
+{-| Inserts first added element of list to history.
+
+    rewindAll (History "1000px" ["800px", "600px", "400px", "200px"])
+
+    -- creates: History "200px" []
+
+-}
+rewindAll : History a -> History a
+rewindAll ((History _ past) as history) =
+    case List.reverse past of
+        old :: remains ->
+            History old []
 
         [] ->
             history
