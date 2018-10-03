@@ -1,5 +1,5 @@
 module History exposing
-    ( History(..)
+    ( History
     , create, forward, rewind, current
     )
 
