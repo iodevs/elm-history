@@ -1,7 +1,6 @@
 module History exposing
     ( History
-    , create, forward, rewind, current
-    , rewindAll
+    , create, forward, rewind, rewindAll, current
     )
 
 {-| This library helps with keeping history of states of your variables.
@@ -17,7 +16,7 @@ same width of div as before user's action.
 
 # Helpers
 
-@docs create, forward, rewind, current
+@docs create, forward, rewind, rewindAll, current
 
 -}
 
