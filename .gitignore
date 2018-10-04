@@ -5,3 +5,5 @@ tags
 .vimrc
 .envs
 .projections.json
+
+node_modules/
