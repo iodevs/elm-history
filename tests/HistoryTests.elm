@@ -40,24 +40,13 @@ suite =
                     Expect.equal first second
             ]
         , describe "rewindAll"
-            [ fuzz (list string) "should store history values and get it in reverse order (heap)" <|
+            [ fuzz (list string) "should return first added element of list to history" <|
                 \vals ->
                     vals
                         |> List.foldl forward (create "first")
-                        |> (\result -> rewindAll result == create "first")
-                        |> Expect.true "Expected the 'History \"first\" []'"
-            , test "should return first added element of list to history" <|
-                \_ ->
-                    let
-                        first =
-                            create "first"
-
-                        nextHistory =
-                            first
-                                |> forward "second"
-                                |> forward "third"
-                    in
-                    Expect.equal first (rewindAll nextHistory)
+                        |> rewindAll
+                        |> current
+                        |> Expect.equal "first"
             ]
         , describe "current"
             [ fuzz (list string) "should return current value" <|
